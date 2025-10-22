@@ -1,7 +1,9 @@
-package studentmanagement.model;
 
-import java.sql.Timestamp;
+
+package model;
+
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Attendance {
     private int attendanceId;
@@ -10,22 +12,21 @@ public class Attendance {
     private int slotId;
     private Date date;
     private boolean status;
-    private int markedBy;
+    private Integer markedBy;
     private Timestamp markedAt;
 
     public Attendance() {}
 
-    public Attendance(int attendanceId, int studentId, int courseId, int slotId, Date date, boolean status, int markedBy, Timestamp markedAt) {
-        this.attendanceId = attendanceId;
+    public Attendance(int studentId, int courseId, int slotId, Date date, boolean status, Integer markedBy) {
         this.studentId = studentId;
         this.courseId = courseId;
         this.slotId = slotId;
         this.date = date;
         this.status = status;
         this.markedBy = markedBy;
-        this.markedAt = markedAt;
     }
 
+    // Getters and Setters
     public int getAttendanceId() { return attendanceId; }
     public void setAttendanceId(int attendanceId) { this.attendanceId = attendanceId; }
 
@@ -44,14 +45,23 @@ public class Attendance {
     public boolean isStatus() { return status; }
     public void setStatus(boolean status) { this.status = status; }
 
-    public int getMarkedBy() { return markedBy; }
-    public void setMarkedBy(int markedBy) { this.markedBy = markedBy; }
+    public Integer getMarkedBy() { return markedBy; }
+    public void setMarkedBy(Integer markedBy) { this.markedBy = markedBy; }
 
     public Timestamp getMarkedAt() { return markedAt; }
     public void setMarkedAt(Timestamp markedAt) { this.markedAt = markedAt; }
 
     @Override
     public String toString() {
-        return "Attendance [id=" + attendanceId + ", studentId=" + studentId + ", courseId=" + courseId + ", status=" + status + "]";
+        return "Attendance{" +
+                "attendanceId=" + attendanceId +
+                ", studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", slotId=" + slotId +
+                ", date=" + date +
+                ", status=" + status +
+                ", markedBy=" + markedBy +
+                ", markedAt=" + markedAt +
+                '}';
     }
 }

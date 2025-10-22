@@ -1,4 +1,6 @@
-package studentmanagement.model;
+
+
+package model;
 
 import java.sql.Timestamp;
 
@@ -11,14 +13,13 @@ public class Teacher {
 
     public Teacher() {}
 
-    public Teacher(int teacherId, String name, String email, String department, Timestamp createdAt) {
-        this.teacherId = teacherId;
+    public Teacher(String name, String email, String department) {
         this.name = name;
         this.email = email;
         this.department = department;
-        this.createdAt = createdAt;
     }
 
+    // Getters and Setters
     public int getTeacherId() { return teacherId; }
     public void setTeacherId(int teacherId) { this.teacherId = teacherId; }
 
@@ -36,6 +37,12 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher [id=" + teacherId + ", name=" + name + ", email=" + email + ", department=" + department + "]";
+        return "Teacher{" +
+                "teacherId=" + teacherId +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", department='" + department + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

@@ -1,4 +1,6 @@
-package studentmanagement.model;
+
+
+package model;
 
 import java.sql.Timestamp;
 
@@ -6,21 +8,20 @@ public class Result {
     private int resultId;
     private int studentId;
     private int courseId;
-    private double marks;
+    private Double marks;
     private String grade;
     private Timestamp createdAt;
 
     public Result() {}
 
-    public Result(int resultId, int studentId, int courseId, double marks, String grade, Timestamp createdAt) {
-        this.resultId = resultId;
+    public Result(int studentId, int courseId, Double marks, String grade) {
         this.studentId = studentId;
         this.courseId = courseId;
         this.marks = marks;
         this.grade = grade;
-        this.createdAt = createdAt;
     }
 
+    // Getters and Setters
     public int getResultId() { return resultId; }
     public void setResultId(int resultId) { this.resultId = resultId; }
 
@@ -30,8 +31,8 @@ public class Result {
     public int getCourseId() { return courseId; }
     public void setCourseId(int courseId) { this.courseId = courseId; }
 
-    public double getMarks() { return marks; }
-    public void setMarks(double marks) { this.marks = marks; }
+    public Double getMarks() { return marks; }
+    public void setMarks(Double marks) { this.marks = marks; }
 
     public String getGrade() { return grade; }
     public void setGrade(String grade) { this.grade = grade; }
@@ -41,6 +42,13 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Result [id=" + resultId + ", studentId=" + studentId + ", courseId=" + courseId + ", grade=" + grade + "]";
+        return "Result{" +
+                "resultId=" + resultId +
+                ", studentId=" + studentId +
+                ", courseId=" + courseId +
+                ", marks=" + marks +
+                ", grade='" + grade + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

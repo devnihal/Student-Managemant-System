@@ -1,4 +1,6 @@
-package studentmanagement.model;
+
+
+package model;
 
 import java.sql.Timestamp;
 
@@ -14,17 +16,16 @@ public class Slot {
 
     public Slot() {}
 
-    public Slot(int slotId, int timetableId, String day, int hour, int courseId, int teacherId, String location, Timestamp createdAt) {
-        this.slotId = slotId;
+    public Slot(int timetableId, String day, int hour, int courseId, int teacherId, String location) {
         this.timetableId = timetableId;
         this.day = day;
         this.hour = hour;
         this.courseId = courseId;
         this.teacherId = teacherId;
         this.location = location;
-        this.createdAt = createdAt;
     }
 
+    // Getters and Setters
     public int getSlotId() { return slotId; }
     public void setSlotId(int slotId) { this.slotId = slotId; }
 
@@ -51,6 +52,15 @@ public class Slot {
 
     @Override
     public String toString() {
-        return "Slot [id=" + slotId + ", timetableId=" + timetableId + ", day=" + day + ", hour=" + hour + "]";
+        return "Slot{" +
+                "slotId=" + slotId +
+                ", timetableId=" + timetableId +
+                ", day='" + day + '\'' +
+                ", hour=" + hour +
+                ", courseId=" + courseId +
+                ", teacherId=" + teacherId +
+                ", location='" + location + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }
