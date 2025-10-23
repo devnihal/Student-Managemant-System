@@ -17,43 +17,7 @@ public class StudentCourseDAO {
         }
     }
 
-    public List<StudentCourse> getEnrollmentsByStudent(int studentId) throws SQLException {
-        List<StudentCourse> enrollments = new ArrayList<>();
-        String sql = "SELECT * FROM StudentCourse WHERE student_id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, studentId);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                StudentCourse enrollment = new StudentCourse();
-                enrollment.setStudentCourseId(rs.getInt("student_course_id"));
-                enrollment.setStudentId(rs.getInt("student_id"));
-                enrollment.setCourseId(rs.getInt("course_id"));
-                enrollment.setEnrolledAt(rs.getTimestamp("enrolled_at"));
-                enrollments.add(enrollment);
-            }
-        }
-        return enrollments;
-    }
 
-    public List<StudentCourse> getEnrollmentsByCourse(int courseId) throws SQLException {
-        List<StudentCourse> enrollments = new ArrayList<>();
-        String sql = "SELECT * FROM StudentCourse WHERE course_id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, courseId);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                StudentCourse enrollment = new StudentCourse();
-                enrollment.setStudentCourseId(rs.getInt("student_course_id"));
-                enrollment.setStudentId(rs.getInt("student_id"));
-                enrollment.setCourseId(rs.getInt("course_id"));
-                enrollment.setEnrolledAt(rs.getTimestamp("enrolled_at"));
-                enrollments.add(enrollment);
-            }
-        }
-        return enrollments;
-    }
 
     public void unenrollStudent(int studentId, int courseId) throws SQLException {
         String sql = "DELETE FROM StudentCourse WHERE student_id = ? AND course_id = ?";

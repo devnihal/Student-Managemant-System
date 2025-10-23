@@ -25,28 +25,7 @@ public class AttendanceDAO {
         }
     }
 
-    public List<Attendance> getAttendanceByStudent(int studentId) throws SQLException {
-        List<Attendance> attendances = new ArrayList<>();
-        String sql = "SELECT * FROM Attendance WHERE student_id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, studentId);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Attendance attendance = new Attendance();
-                attendance.setAttendanceId(rs.getInt("attendance_id"));
-                attendance.setStudentId(rs.getInt("student_id"));
-                attendance.setCourseId(rs.getInt("course_id"));
-                attendance.setSlotId(rs.getInt("slot_id"));
-                attendance.setDate(rs.getDate("date"));
-                attendance.setStatus(rs.getBoolean("status"));
-                attendance.setMarkedBy(rs.getInt("marked_by"));
-                attendance.setMarkedAt(rs.getTimestamp("marked_at"));
-                attendances.add(attendance);
-            }
-        }
-        return attendances;
-    }
+
 
     public List<Attendance> getAttendanceBySlot(int slotId, Date date) throws SQLException {
         List<Attendance> attendances = new ArrayList<>();

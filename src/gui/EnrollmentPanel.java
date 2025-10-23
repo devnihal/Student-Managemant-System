@@ -3,8 +3,7 @@ package gui;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.sql.SQLException;
 import java.util.List;
 import dao.StudentCourseDAO;
@@ -158,23 +157,7 @@ public class EnrollmentPanel extends JPanel {
         }
     }
 
-    private void addEnrollment() {
-        try {
-            String selectedStudent = (String) studentComboBox.getSelectedItem();
-            String selectedCourse = (String) courseComboBox.getSelectedItem();
-            if (selectedStudent == null || selectedCourse == null) {
-                JOptionPane.showMessageDialog(this, "Please select a student and a course.");
-                return;
-            }
-            int studentId = Integer.parseInt(selectedStudent.split(" - ")[0]);
-            int courseId = Integer.parseInt(selectedCourse.split(" - ")[0]);
-            StudentCourse enrollment = new StudentCourse(studentId, courseId);
-            enrollmentDAO.enrollStudent(enrollment);
-            loadEnrollments();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error adding enrollment: " + e.getMessage());
-        }
-    }
+
 
 
 

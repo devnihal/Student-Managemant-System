@@ -1,8 +1,6 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.*;
-import java.sql.SQLException;
 
 public class MainGUI extends JFrame {
     private JTabbedPane tabbedPane;

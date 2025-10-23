@@ -43,28 +43,7 @@ public class SlotDAO {
         return null;
     }
 
-    public List<Slot> getSlotsByTimetable(int timetableId) throws SQLException {
-        List<Slot> slots = new ArrayList<>();
-        String sql = "SELECT * FROM Slot WHERE timetable_id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, timetableId);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Slot slot = new Slot();
-                slot.setSlotId(rs.getInt("slot_id"));
-                slot.setTimetableId(rs.getInt("timetable_id"));
-                slot.setDay(rs.getString("day"));
-                slot.setHour(rs.getInt("hour"));
-                slot.setCourseId(rs.getInt("course_id"));
-                slot.setTeacherId(rs.getInt("teacher_id"));
-                slot.setLocation(rs.getString("location"));
-                slot.setCreatedAt(rs.getTimestamp("created_at"));
-                slots.add(slot);
-            }
-        }
-        return slots;
-    }
+
 
     public void updateSlot(Slot slot) throws SQLException {
         String sql = "UPDATE Slot SET timetable_id = ?, day = ?, hour = ?, course_id = ?, teacher_id = ?, location = ? WHERE slot_id = ?";
