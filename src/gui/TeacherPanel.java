@@ -15,7 +15,7 @@ public class TeacherPanel extends JPanel {
     private JTable table;
     private DefaultTableModel tableModel;
     private JTextField nameField, emailField, deptField;
-    private JButton addButton, updateButton, deleteButton, refreshButton;
+    private JButton addButton, deleteButton, refreshButton;
 
     public TeacherPanel() {
         setLayout(new BorderLayout());
@@ -64,11 +64,9 @@ public class TeacherPanel extends JPanel {
         // Buttons
         JPanel buttonPanel = new JPanel();
         addButton = new JButton("Add");
-        updateButton = new JButton("Update");
         deleteButton = new JButton("Delete");
         refreshButton = new JButton("Refresh");
         buttonPanel.add(addButton);
-        buttonPanel.add(updateButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(refreshButton);
 
@@ -79,7 +77,6 @@ public class TeacherPanel extends JPanel {
 
         // Listeners
         addButton.addActionListener(e -> addTeacher());
-        updateButton.addActionListener(e -> updateTeacher());
         deleteButton.addActionListener(e -> deleteTeacher());
         refreshButton.addActionListener(e -> loadTeachers());
 
@@ -109,27 +106,7 @@ public class TeacherPanel extends JPanel {
         }
     }
 
-    private void updateTeacher() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Select a teacher to update.");
-            return;
-        }
-        try {
-            int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
-            Teacher teacher = teacherDAO.getTeacherById(id);
-            if (teacher != null) {
-                teacher.setName(nameField.getText());
-                teacher.setEmail(emailField.getText());
-                teacher.setDepartment(deptField.getText());
-                teacherDAO.updateTeacher(teacher);
-                loadTeachers();
-                clearFields();
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error updating teacher: " + e.getMessage());
-        }
-    }
+
 
     private void deleteTeacher() {
         int selectedRow = table.getSelectedRow();

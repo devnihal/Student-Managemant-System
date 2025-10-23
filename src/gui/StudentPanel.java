@@ -15,7 +15,7 @@ public class StudentPanel extends JPanel {
     private JTable table;
     private DefaultTableModel tableModel;
     private JTextField nameField, emailField, deptField;
-    private JButton addButton, updateButton, deleteButton, refreshButton;
+    private JButton addButton, deleteButton, refreshButton;
 
     public StudentPanel() {
         setLayout(new BorderLayout());
@@ -67,11 +67,9 @@ public class StudentPanel extends JPanel {
         // Buttons
         JPanel buttonPanel = new JPanel();
         addButton = new JButton("Add");
-        updateButton = new JButton("Update");
         deleteButton = new JButton("Delete");
         refreshButton = new JButton("Refresh");
         buttonPanel.add(addButton);
-        buttonPanel.add(updateButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(refreshButton);
 
@@ -82,7 +80,6 @@ public class StudentPanel extends JPanel {
 
         // Listeners
         addButton.addActionListener(e -> addStudent());
-        updateButton.addActionListener(e -> updateStudent());
         deleteButton.addActionListener(e -> deleteStudent());
         refreshButton.addActionListener(e -> loadStudents());
 
@@ -112,34 +109,7 @@ public class StudentPanel extends JPanel {
         }
     }
 
-    private void updateStudent() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Select a student to update.");
-            return;
-        }
-        try {
-            int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
-            Student student = studentDAO.getStudentById(id);
-            if (student != null) {
-                String name = nameField.getText().trim();
-                String email = emailField.getText().trim();
-                String dept = deptField.getText().trim();
-                if (name.isEmpty() || email.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "Name and Email cannot be empty.");
-                    return;
-                }
-                student.setName(name);
-                student.setEmail(email);
-                student.setDepartment(dept);
-                studentDAO.updateStudent(student);
-                loadStudents();
-                clearFields();
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error updating student: " + e.getMessage());
-        }
-    }
+
 
     private void deleteStudent() {
         int selectedRow = table.getSelectedRow();

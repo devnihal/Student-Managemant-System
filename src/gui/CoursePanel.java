@@ -15,7 +15,7 @@ public class CoursePanel extends JPanel {
     private JTable table;
     private DefaultTableModel tableModel;
     private JTextField nameField, creditsField, descField;
-    private JButton addButton, updateButton, deleteButton, refreshButton;
+    private JButton addButton, deleteButton, refreshButton;
 
     public CoursePanel() {
         setLayout(new BorderLayout());
@@ -67,11 +67,9 @@ public class CoursePanel extends JPanel {
         // Buttons
         JPanel buttonPanel = new JPanel();
         addButton = new JButton("Add");
-        updateButton = new JButton("Update");
         deleteButton = new JButton("Delete");
         refreshButton = new JButton("Refresh");
         buttonPanel.add(addButton);
-        buttonPanel.add(updateButton);
         buttonPanel.add(deleteButton);
         buttonPanel.add(refreshButton);
 
@@ -82,7 +80,6 @@ public class CoursePanel extends JPanel {
 
         // Listeners
         addButton.addActionListener(e -> addCourse());
-        updateButton.addActionListener(e -> updateCourse());
         deleteButton.addActionListener(e -> deleteCourse());
         refreshButton.addActionListener(e -> loadCourses());
 
@@ -112,27 +109,7 @@ public class CoursePanel extends JPanel {
         }
     }
 
-    private void updateCourse() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Select a course to update.");
-            return;
-        }
-        try {
-            int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
-            Course course = courseDAO.getCourseById(id);
-            if (course != null) {
-                course.setCourseName(nameField.getText());
-                course.setCredits(Integer.parseInt(creditsField.getText()));
-                course.setDescription(descField.getText());
-                courseDAO.updateCourse(course);
-                loadCourses();
-                clearFields();
-            }
-        } catch (SQLException | NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error updating course: " + e.getMessage());
-        }
-    }
+
 
     private void deleteCourse() {
         int selectedRow = table.getSelectedRow();
